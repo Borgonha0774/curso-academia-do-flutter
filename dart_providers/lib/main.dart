@@ -3,6 +3,8 @@ import 'package:dart_providers/provider/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'change_notifier/change_notifier_page.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -29,6 +31,7 @@ class MyApp extends StatelessWidget {
         ),
         routes: {
           '/provider': (_) => const ProviderPage(),
+          '/change': (_) => const ChangeNotifierPage(),
         },
         home: Builder(
           builder: (context) {
@@ -44,7 +47,9 @@ class MyApp extends StatelessWidget {
                       child: const Text('Provider'),
                     ),
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).pushNamed('/change');
+                      },
                       child: const Text('Change Notifier'),
                     ),
                   ],
