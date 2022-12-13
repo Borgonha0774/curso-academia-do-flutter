@@ -29,9 +29,12 @@ class ProviderPage extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                CircleAvatar(
-                  backgroundImage: NetworkImage(user.imgAvatar),
-                  minRadius: 120,
+                FittedBox(
+                  fit: BoxFit.contain,
+                  child: CircleAvatar(
+                    backgroundImage: NetworkImage(user.imgAvatar),
+                    minRadius: 60,
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(12.0),

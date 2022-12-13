@@ -1,3 +1,4 @@
+import 'package:dart_providers/change_notifier/provider_controller.dart';
 import 'package:dart_providers/provider/provider_page.dart';
 import 'package:dart_providers/provider/user_model.dart';
 import 'package:flutter/material.dart';
@@ -15,14 +16,22 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return Provider(
-      create: (_) {
-        return UserModel(
-            name: 'Rodrigo Rahman',
-            imgAvatar:
-                'https://png.pngtree.com/png-vector/20190223/ourmid/pngtree-vector-avatar-icon-png-image_695765.jpg',
-            birthDate: '27/03/1983');
-      },
+    return MultiProvider(
+      providers: [
+        Provider(
+          create: (_) {
+            return UserModel(
+                name: 'Rodrigo Rahman',
+                imgAvatar:
+                    'https://png.pngtree.com/png-vector/20190223/ourmid/pngtree-vector-avatar-icon-png-image_695765.jpg',
+                birthDate: '27/03/1983');
+          },
+        ),
+        /* è um tipo especifico  */
+        ChangeNotifierProvider(
+          create: (_) => ProviderController(),
+        ),
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
