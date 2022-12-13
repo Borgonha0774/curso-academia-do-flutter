@@ -1,6 +1,7 @@
-import 'package:sqflite_common/sqlite_api.dart';
+import 'package:sqflite/sqflite.dart';
 import 'package:todo_list_provider/app/core/database/migrations/migration.dart';
 
+/* Primeira migration  criando as tabelas no bd, como é a primeira version não existe update*/
 class MigrationV1 implements Migration {
   @override
   void create(Batch bacth) {

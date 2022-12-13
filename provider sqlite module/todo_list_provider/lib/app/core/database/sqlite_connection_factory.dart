@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 /* Fabrica de connexões precisa ser criada com conceito de singleton*/
 
 import 'package:path/path.dart';
@@ -12,14 +14,17 @@ class SqliteConnectionFactory {
 
 /* Precisamos criar um atributo de classe que controla a database */
   Database? _db;
+
   /* Essa variavel vem da classe sicronized do Dart trabalha com multithreads*/
   final _lock = Lock();
+
 /* Variavel privada que controla a instancia */
   static SqliteConnectionFactory? _instace;
+
 /* Construtor privado  para que não possa ser instanciado de uma forma natura*/
   SqliteConnectionFactory._();
 
-/*  Esta função factory controla a instancia do sqlite implantando o padrão de singleton*/
+/*  Este é um construtor do tipo factory controla a instancia do sqlite implantando o padrão de singleton*/
   factory SqliteConnectionFactory() {
     // ignore: prefer_conditional_assignment
     if (_instace == null) {
@@ -30,10 +35,11 @@ class SqliteConnectionFactory {
 
 /* Open Database */
   Future<Database> openConnection() async {
+    /* Pegando a rota do banco no device e inserindo o nome da banco */
     var databasePath = await getDatabasesPath();
     var databasePathFinal = join(databasePath, _DATABASE_NAME);
 
-    /* Este processo permite abrir o banco apenas uma vez estrutura base*/
+    /* Este processo permite abrir o banco apenas uma vez e criar a estrutura base*/
     if (_db == null) {
       await _lock.synchronized(() async {
         // ignore: prefer_conditional_assignment
@@ -59,6 +65,7 @@ class SqliteConnectionFactory {
   }
 
 /* Configurações do bd */
+//foreign_keys on para liberar as keys
   Future<void> _onConfigure(Database db) async {
     await db.execute('PRAGMA foreign_keys = ON');
   }
@@ -67,6 +74,7 @@ class SqliteConnectionFactory {
   Future<void> _onCreate(Database db, int version) async {
     final bacth = db.batch();
 
+    /* criando a primeira migration  */
     final migrations = SqliteMigrationFactory().getCreateMigration();
     for (var migration in migrations) {
       migration.create(bacth);
@@ -78,6 +86,7 @@ class SqliteConnectionFactory {
   Future<void> _onUpgrade(Database db, int oldVersion, int version) async {
     final bacth = db.batch();
 
+    /* fazendo um upgrade das tabelas alterando a version */
     final migrations = SqliteMigrationFactory().getUpgradeMigration(oldVersion);
     for (var migration in migrations) {
       migration.update(bacth);
