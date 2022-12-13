@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_print
 
 void main(List<String> args) async {
+  print('AWAIT FOR');
   /* Para criar uma Stream precisamos de um controller com excessão do periodic*/
 
   const interval = Duration(microseconds: 1);
