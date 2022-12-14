@@ -39,6 +39,8 @@ dependencies:
   sqflite: ^2.2.2
   path: ^1.8.2
   synchronized: ^3.0.0+3
+  google_fonts: ^3.0.1
+  flutter_signin_button: ^2.0.0
 
 dev_dependencies:
   flutter_test:
@@ -77,10 +79,11 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
+  # icon flutterIcon customizada em uma fonte
+  fonts:
+    - family: TodoListIcons
+      fonts:
+        - asset: assets/fonts/TodoListIcons.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro
